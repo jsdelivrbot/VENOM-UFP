@@ -5,6 +5,10 @@ export default {
     return Api().get('posts')
   },
 
+  fetchContact() {
+    return Api().get('posts/cache')
+  },
+
   addPost (params) {
     return Api().post('posts', params)
   },
@@ -19,5 +23,5 @@ export default {
 
   deletePost (id) {
     return Api().delete('posts/' + id)
-  }
+  },
 }

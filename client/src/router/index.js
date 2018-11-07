@@ -4,7 +4,13 @@ import Posts from '@/components/Posts'
 import NewPost from '@/components/NewPost'
 import EditPost from '@/components/EditPost'
 import Hello from '@/views/Hello'
+import Signin from '@/components/Signin'
+import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
+import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 
+import Vuetify from 'vuetify'
+ 
+Vue.use(Vuetify)
 Vue.use(Router)
 
 export default new Router({
@@ -29,6 +35,12 @@ export default new Router({
       path: '/posts/:id',
       name: 'EditPost',
       component: EditPost
-    }
+    },
+    {
+      path: '/signin',
+      name: 'Signin',
+      component: Signin
+    },
+    
   ]
 })

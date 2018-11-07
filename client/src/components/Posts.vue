@@ -13,6 +13,7 @@
           <td width="550">Codigo Postal</td>
           <td>Freguesia</td>
           <td width="550">Latitude</td>
+          <td width="550">Longitude</td>
           <td width="100" align="center">Ação</td>
         </tr>
         <tr v-bind:key="post.id" v-for="post in posts">
@@ -22,6 +23,7 @@
           <td>{{ post.codigopostal }}</td>
           <td>{{ post.freguesia }}</td>
            <td>{{ post.latitude }}</td>
+          <td>{{ post.longitude }}</td>
           <td align="center">
             <router-link v-bind:to="{ name: 'EditPost', params: { id: post._id } }">Editar</router-link> |
             <a href="#" @click="deletePost(post._id)">Deletar</a>
@@ -34,7 +36,9 @@
       <router-link v-bind:to="{ name: 'NewPost' }" class="add_post_link">Adicionar Empresa</router-link>
     </div>
   </div>
+  
 </template>
+
 
 <script>
 import PostsService from '@/services/PostsService'

@@ -1,4 +1,6 @@
 <template>
+
+
   <div class="posts">
     <h1>Adicionar Empresa</h1>
       <div class="form">
@@ -13,12 +15,14 @@
         <div>
           <textarea rows="1" cols="1" placeholder="FREGUESIA" v-model="freguesia"></textarea>
           <textarea rows="1" cols="1" placeholder="LATITUDE" v-model="latitude"></textarea>
+          <textarea rows="1" cols="1" placeholder="LONGITUDE" v-model="longitude"></textarea>
         </div>
           <div>
           <button class="app_post_btn" @click="addPost">Adicionar</button>
         </div>
       </div>
   </div>
+  
 </template>
 
 <script>
@@ -32,7 +36,8 @@ export default {
       fone: '',
       codigopostal: '',
       freguesia: '',
-      latitude: ''
+      latitude: '',
+      longitude: ''
     }
   },
   methods: {
@@ -43,7 +48,8 @@ export default {
         fone: this.fone,
         codigopostal: this.codigopostal,
         freguesia: this.freguesia,
-        latitude: this.latitude
+        latitude: this.latitude,
+        longitude: this.longitude
       })
       this.$router.push({ name: 'Posts' })
     }
