@@ -10,6 +10,14 @@
         <div>
             <h3>Resultados mais pesquisados</h3>
             <h4>SLIDE</h4>
+            <carousel>
+  <slide>
+    Slide 1 Content
+  </slide>
+  <slide>
+    Slide 2 Content
+  </slide>
+</carousel>
           </div>
           <div>
             <h3>Mapa</h3><h4>MAPA</h4>
