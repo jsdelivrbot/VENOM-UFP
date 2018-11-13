@@ -8,14 +8,16 @@ import '../node_modules/vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import * as VueGoogleMaps from 'vue2-google-maps'
 
-Vue.config.productionTip = false
-Vue.use(Vuetify,VueGoogleMaps, {
+Vue.use(VueGoogleMaps, {
   load: {
-    key: "AIzaSyAZUmEiFhpW_wVsa-VT9o1Y_TOE3BCGidg",
-    libraries: "places" // necessary for places input
-  },
+    key: 'AIzaSyAZUmEiFhpW_wVsa-VT9o1Y_TOE3BCGidg'
+  } 
+})
+// GOOGLEKEY AIzaSyAZUmEiFhpW_wVsa-VT9o1Y_TOE3BCGidg
+Vue.config.productionTip = false
+Vue.use(Vuetify, {
   theme: {
-    primary: '#3f51b5',
+    primary: '#FFEB3B',
     secondary: '#b0bec5',
     accent: '#8c9eff',
     error: '#b71c1c'
@@ -28,5 +30,4 @@ new Vue({
   router,
   components: { App },
   template: '<App/>'
-  
 })

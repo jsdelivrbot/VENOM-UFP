@@ -20,7 +20,10 @@ export default {
   getPost (params) {
     return Api().get('post/' + params.id)
   },
-
+  
+getPostSearch(params){
+  return Api().get('post/' + params.nome, params.local)
+},
   deletePost (id) {
     return Api().delete('posts/' + id)
   },
