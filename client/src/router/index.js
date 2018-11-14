@@ -6,11 +6,11 @@ import EditPost from '@/components/EditPost'
 import Hello from '@/views/Hello'
 import Signin from '@/components/Signin'
 import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
-import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
+//import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 
-import Vuetify from 'vuetify'
+//import Vuetify from 'vuetify'
  
-Vue.use(Vuetify)
+//Vue.use(Vuetify)
 Vue.use(Router)
 
 export default new Router({
@@ -41,6 +41,11 @@ export default new Router({
       name: 'Signin',
       component: Signin
     },
+    {
+      path: '/posts/:nome/:freguesia',
+      name: 'search',
+      component: Hello
+    }
     
   ]
 })

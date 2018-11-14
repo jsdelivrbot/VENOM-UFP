@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app> 
     <v-navigation-drawer v-model="sideNav" absolute temporary>
       <v-list>
         <v-list-tile>
@@ -43,5 +43,3 @@ export default {
   }
 };
 </script>
-
-

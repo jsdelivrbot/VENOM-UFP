@@ -22,7 +22,7 @@ export default {
   },
   
 getPostSearch(params){
-  return Api().get('post/' + params.nome, params.local)
+  return Api().get('posts/' + params.nome +'/'+ params.freguesia)
 },
   deletePost (id) {
     return Api().delete('posts/' + id)

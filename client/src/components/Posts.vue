@@ -1,6 +1,6 @@
 <template>
   <div class="posts">
-    <h1>Páginas Amarelas</h1>
+    <h1>Gestão de Contactos</h1>
     <div v-if="posts.length > 0" class="table-wrap">
       <div>
         <router-link v-bind:to="{ name: 'NewPost' }" class="">Adicionar Empresa</router-link>

@@ -1,16 +1,15 @@
 <template>
 <v-container>
-
-    <v-layout row wrap>
-        <v-flex xs12>
-            <v-card color="primary">
-                <v-form>
+    <v-layout row wrap >
+        <v-flex xs12 >
+            <v-card>
+                <v-form >
                     <v-container>
-                        <v-layout row wrap>
-                            <v-text-field v-model="nome" label="Encontrar o contacto de..." outline></v-text-field>
-                            <v-text-field v-model="local" label="No Local..." outline></v-text-field>
+                        <v-layout row wrap >
+                            <v-text-field  color="secondary" v-model="nome" label="Encontrar o contacto de..." outline></v-text-field>
+                            <v-text-field color="secondary" v-model="local" label="No Local..." outline></v-text-field>
                             <v-tooltip bottom>
-                                <v-btn type="submit" v-bind:to="{ name: 'getPostSearch', params: { nome, local  } }" dark fab medium slot="activator">
+                                <v-btn type="submit" v-on:click="getPostSearch" dark fab medium slot="activator">
                                     <v-icon>search</v-icon>
                                 </v-btn>
                                 <span>Pesquisar</span>
@@ -20,17 +19,16 @@
                 </v-form>
             </v-card>
         </v-flex>
-
         <v-flex xs12>
             <v-card dark color="primary">
                 <v-card-text class="px-0">
                     <v-carousel height="200">
-                        <v-carousel-item v-for="contact in contactsCache" :key="contact._id" :src="'http://localhost:8081/'+contact.contactImage" style="opacity: 0.6">
+                        <v-carousel-item v-for="contact in contactsCache" :key="contact._id" :src="'http://localhost:8081/'+contact.contactImage">
                             <div class="contentCarousel">
-                                <v-card-text class="px-0">
+                                <v-card-text >
                                     {{contact.nome}} <br>
                                     {{contact.morada}}<br>
-                                    {{ contact.freguesia}}<br>
+                                    {{contact.freguesia}}<br>
                                     {{contact.fone}}</v-card-text>
                             </div>
                         </v-carousel-item>
@@ -38,6 +36,7 @@
                 </v-card-text>
             </v-card>
         </v-flex>
+
         <v-content>
             <v-container>
                 <v-layout row wrap align-center>
@@ -52,10 +51,10 @@
                                         </v-layout>
                                     </v-container>
                                 </v-card-media>
-                                <v-card-text>
-                                    <span class="grey--text"> {{ contact.nome }}</span><br>
-                                    <span> {{ contact.morada }}</span><br>
-                                    <span>{{ contact.codigopostal }}</span>
+                                <v-card-text class="secondary">
+                                    <span class="white--text"> {{ contact.nome }}</span><br>
+                                    <span class="white--text"> {{ contact.morada }}</span><br>
+                                    <span class="white--text">{{ contact.codigopostal }}</span>
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-card-text>{{contact.freguesia}}</v-card-text>
@@ -71,15 +70,13 @@
                     </v-flex>
                     <v-flex xs12 md4>
                         <div class="text-xs-center">
-                            <GmapMap :center="{lat:41.172873, lng:-8.611798}" 
-                            :zoom="7" map-type-id="terrain" style="width: 500px; height: 300px">
+                            <GmapMap :center="{lat:41.172873, lng:-8.611798}" :zoom="7" map-type-id="terrain" style="width: 500px; height: 300px">
                                 <GmapMarker :key="index" v-for="(m, index) in contactsCache" 
-                                 var indexposition =  new google.maps.LatLng(m.latitude, m.longitude);
-                                 console.log(indexposition)
+                                var indexposition=new google.maps.LatLng(m.latitude, m.longitude); 
+                                console.log(indexposition) 
                                 :position="indexposition" 
                                 :clickable="true" 
-                                :draggable="true" 
-                                @click="center=m.position" />
+                                :draggable="true" @click="center=m.position" />
                             </GmapMap>
                         </div>
                     </v-flex>
@@ -87,7 +84,7 @@
             </v-container>
         </v-content>
         <div id="contactCache">
-            <div v-for="contact in contactsCache" :key="contact._id">
+            <div v-for="contact in searchResult" :key="contact._id">
                 <P> {{contact}} </p>
             </div>
         </div>
@@ -104,11 +101,15 @@ export default {
     data() {
         return {
             contactsCache: [],
-            searchResult: []
+            searchResult: [],
+            nome: null,
+            local: null,
         };
     },
     mounted() {
         this.getcache();
+        this.getPostSearch();
+
     },
     methods: {
         async getcache() {
@@ -116,12 +117,13 @@ export default {
             this.contactsCache = response.data;
             console.log(contactsCache);
         },
-        getPostSearch() {
-
-            //const response = await PostsService.getPostSearch();
-            //  this.searchResult = response.data;
-            console.log(this.nome, this.local)
-        }
+        async getPostSearch() {
+            const responde = await PostsService.getPostSearch({
+                nome: this.nome,
+                freguesia: this.local
+            })
+                this.searchResult = responde.data;
+            }
     }
 };
 </script>
@@ -129,11 +131,8 @@ export default {
 <style scoped>
 .contentCarousel {
     text-align: center;
-    color: black;
     font-size: 150%;
-}
-
-#primary {
-    color: #ecde12;
+    background-color: black;
+    opacity: 0.6;
 }
 </style>

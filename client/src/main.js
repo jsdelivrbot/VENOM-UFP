@@ -13,12 +13,12 @@ Vue.use(VueGoogleMaps, {
     key: 'AIzaSyAZUmEiFhpW_wVsa-VT9o1Y_TOE3BCGidg'
   } 
 })
-// GOOGLEKEY AIzaSyAZUmEiFhpW_wVsa-VT9o1Y_TOE3BCGidg
+
 Vue.config.productionTip = false
 Vue.use(Vuetify, {
   theme: {
     primary: '#FFEB3B',
-    secondary: '#b0bec5',
+    secondary: '#1976D2',
     accent: '#8c9eff',
     error: '#b71c1c'
   }
@@ -29,5 +29,6 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  
 })
