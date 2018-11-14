@@ -3,11 +3,9 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 
-var Post = require("./models/posts");
-
 const app = express()
 app.use(morgan('combined'))
-app.use(bodyParser.json())
+//app.use(bodyParser.json())
 app.use(cors())
 
 
@@ -16,26 +14,29 @@ const postsRoutes = require('./routes/posts');
 
 
 // DB Setup
+
 var mongoose = require('mongoose');
 
-/*var DATABASE_URL = process.env.DATABASE_URL || 'http://localhost'
-mongoose.connect(`mongodb://${DATABASE_URL}/posts`);
-
+var DATABASE_URL = process.env.DATABASE_URL || 'http://localhost'
+//mongoose.connect(`mongodb://${DATABASE_URL}/posts`);
+mongoose.connect('mongodb://localhost:27017/yellowpages');
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
 db.once("open", function(callback){
   console.log("Connection Succeeded");
-});*/
+});
 
-var PASS = 'richard2018';
+
+/*var PASS = 'richard2018';
 var url = 'mongodb://richard:'+PASS+'@yellowpages-shard-00-00-yqbsq.mongodb.net:27017,yellowpages-shard-00-01-yqbsq.mongodb.net:27017,yellowpages-shard-00-02-yqbsq.mongodb.net:27017/yellowpages';
+//var url = 'mongodb+srv://richard:'+PASS+'@yellowpages-yqbsq.mongodb.net/test?retryWrites=true';
 const opts = {
   replicaSet: 'yellowpages-shard-0',
   ssl:true,
   authSource:'admin'
-};
+};*/
 
-var db = mongoose.connect(url,opts);
+//var db = mongoose.connect(url,opts);
 
 mongoose.Promise = global.Promise;
 

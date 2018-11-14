@@ -32,6 +32,15 @@ const upload = multer({
     fileFilter: fileFilter
 });
 
+router.get('/', (req, res) => {
+  Post.find(function (error, posts) {
+    if (error) { console.error(error); }
+    res.send({
+      posts: posts
+    })
+  }).sort({_id:-1})
+});
+
 /**
  * Caminho dos contactos em Cache para o carousel
  */
@@ -51,25 +60,41 @@ router.get('/cache', (req,res) => {
 
 });
 
-router.get('/', (req, res) => {
-    Post.find({}, 'nome morada', function (error, posts) {
+
+  
+  /**
+  /**
+   * Procura por freguesia
+   */
+  router.get('/:nome/:freguesia', (req, res) => {
+  
+    Post.find({nome: req.params.nome, freguesia: req.params.freguesia}, function (error, posts) {
       if (error) { console.error(error); }
       res.send({
         posts: posts
       })
     }).sort({_id:-1})
   });
-  
-  /**
-   * Procura por freguesia
+
+    /**
+   * Procura por nome
+   * Request URL http://localhost:8081/posts/contactos/feup
    */
-  router.get('/:freguesia', (req, res) => {
-    Post.find({freguesia: req.params.freguesia}, function (error, posts) {
-      if (error) { console.error(error); }
-      res.send({
-        posts: posts
+  router.get('/:nome', (req,res) => {
+
+    Post.find({nome: req.params.nome})
+    .exec()
+    .then(docs => {
+      console.log(docs);
+      res.status(200).json(docs);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
       })
-    }).sort({_id:-1})
+    });
+  
   });
    
   // Post Endpoints
@@ -99,7 +124,9 @@ router.get('/', (req, res) => {
   // Fetch single post
   router.get('/:id', (req, res) => {
     var db = req.db;
-    Post.findById(req.params.id, 'nome morada fone codigopostal freguesia latitude longitude contactImage', function (error, post) {
+    const id = req.params.id;
+
+    Post.findById(id, 'nome morada fone codigopostal freguesia latitude longitude contactImage', function (error, post) {
       if (error) { console.error(error); }
       res.send(post)
     })
